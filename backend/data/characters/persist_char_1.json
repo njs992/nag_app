@@ -1,0 +1,25 @@
+{
+  "id": "persist_char_1",
+  "player_name": "Player",
+  "character_name": "Hero",
+  "class": "Warrior",
+  "level": 5,
+  "position": {
+    "x": 0,
+    "y": 0
+  },
+  "health": {
+    "current": 10,
+    "max": 10
+  },
+  "stats": {
+    "str": 18,
+    "dex": 10,
+    "con": 16,
+    "int": 9,
+    "wis": 12,
+    "cha": 11
+  },
+  "inventory": [],
+  "abilities": []
+}

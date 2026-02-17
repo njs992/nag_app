@@ -1,0 +1,29 @@
+{
+  "id": "player_1",
+  "player_name": "Sarah",
+  "character_name": "Aragorn",
+  "class": "Ranger",
+  "level": 5,
+  "position": {
+    "x": 10,
+    "y": 8
+  },
+  "health": {
+    "current": 25,
+    "max": 25
+  },
+  "stats": {
+    "str": 16,
+    "dex": 14,
+    "con": 15,
+    "int": 12,
+    "wis": 13,
+    "cha": 11
+  },
+  "inventory": [
+    "sword",
+    "bow",
+    "torch"
+  ],
+  "abilities": []
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPG - Player Interface</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Tabletop RPG - Player Interface</h1>
+            <div id="status">Connecting...</div>
+        </div>
+        
+        <div class="main-content">
+            <div class="left-panel">
+                <div class="character-panel">
+                    <h2>Character Info</h2>
+                    <div id="character-info">
+                        <p>No character loaded</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="center-panel">
+                <div class="gameboard">
+                    <canvas id="gameboardCanvas" width="600" height="600"></canvas>
+                </div>
+            </div>
+            
+            <div class="right-panel">
+                <div class="chat-panel">
+                    <h2>Chat</h2>
+                    <div id="chat-messages"></div>
+                    <input type="text" id="chat-input" placeholder="Send message...">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

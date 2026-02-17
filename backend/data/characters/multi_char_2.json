@@ -1,0 +1,25 @@
+{
+  "id": "multi_char_2",
+  "player_name": "Player2",
+  "character_name": "Hero2",
+  "class": "Warrior",
+  "level": 3,
+  "position": {
+    "x": 0,
+    "y": 0
+  },
+  "health": {
+    "current": 10,
+    "max": 10
+  },
+  "stats": {
+    "str": 10,
+    "dex": 10,
+    "con": 10,
+    "int": 10,
+    "wis": 10,
+    "cha": 10
+  },
+  "inventory": [],
+  "abilities": []
+}

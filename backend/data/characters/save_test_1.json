@@ -1,0 +1,25 @@
+{
+  "id": "save_test_1",
+  "player_name": "Sarah",
+  "character_name": "Elf Archer",
+  "class": "Ranger",
+  "level": 5,
+  "position": {
+    "x": 0,
+    "y": 0
+  },
+  "health": {
+    "current": 10,
+    "max": 10
+  },
+  "stats": {
+    "str": 10,
+    "dex": 16,
+    "con": 12,
+    "int": 14,
+    "wis": 15,
+    "cha": 13
+  },
+  "inventory": [],
+  "abilities": []
+}
