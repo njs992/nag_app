@@ -2,9 +2,11 @@
 
 from flask import Flask, render_template, jsonify
 from flask_cors import CORS
-from flask_socketio import SocketIO, emit
+from flask_socketio import SocketIO
 
 from config import Config
+from features.websocket_events import WebSocketEventHandler
+from features.game_state import game_state_manager
 
 # Initialize Flask app
 app = Flask(__name__, template_folder="../player_web/templates", static_folder="../player_web/static")
@@ -15,6 +17,9 @@ CORS(app, origins=Config.CORS_ORIGINS)
 
 # Initialize SocketIO for WebSocket support
 sio = SocketIO(app, cors_allowed_origins=Config.CORS_ORIGINS)
+
+# Initialize WebSocket event handlers
+event_handler = WebSocketEventHandler(sio)
 
 # ============================================================================
 # ROUTES
@@ -38,26 +43,12 @@ def get_config():
         "max_players": Config.MAX_PLAYERS_PER_GAME
     }), 200
 
-# ============================================================================
-# WEBSOCKET EVENTS
-# ============================================================================
+@app.route("/api/stats", methods=["GET"])
+def get_stats():
+    """Get server statistics."""
+    stats = event_handler.get_event_stats()
+    return jsonify(stats), 200
 
-@sio.event
-def connect(sid=None):
-    """Handle client connection."""
-    print(f"Client {sid} connected")
-    emit("response", {"data": "Connected to server"})
-
-@sio.event
-def disconnect():
-    """Handle client disconnection."""
-    print(f"Client disconnected")
-
-@sio.event
-def echo(data):
-    """Echo test - simple echo-back for testing."""
-    print(f"Received message: {data}")
-    emit("response", {"data": data})
 
 # ============================================================================
 # ERROR HANDLERS

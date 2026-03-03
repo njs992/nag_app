@@ -10,36 +10,91 @@
     <div class="container">
         <div class="header">
             <h1>Tabletop RPG - Player Interface</h1>
-            <div id="status">Connecting...</div>
+            <div id="connection-status" class="status disconnected">Disconnected</div>
         </div>
         
-        <div class="main-content">
+        <!-- Join Game Section -->
+        <div id="join-section" class="join-section" style="display: none;">
+            <div class="join-form">
+                <h2>Join Game</h2>
+                <input type="text" id="character-name-input" placeholder="Enter character name..." />
+                <button id="join-btn">Join Game</button>
+            </div>
+        </div>
+        
+        <!-- Game Interface (Hidden until joined) -->
+        <div id="game-section" class="main-content" style="display: none;">
             <div class="left-panel">
+                <!-- Character Info -->
                 <div class="character-panel">
                     <h2>Character Info</h2>
                     <div id="character-info">
-                        <p>No character loaded</p>
+                        <p>Connected, waiting to join...</p>
                     </div>
+                </div>
+                
+                <!-- Gameboard Info -->
+                <div class="board-info-panel">
+                    <h2>Map</h2>
+                    <div id="board-info">
+                        <p>No map loaded</p>
+                    </div>
+                </div>
+                
+                <!-- Combat Info (Hidden) -->
+                <div id="combat-info" class="combat-panel" style="display: none;">
+                    <h2>⚔️ Combat</h2>
+                    <div id="combat-details"></div>
                 </div>
             </div>
             
             <div class="center-panel">
                 <div class="gameboard">
+                    <h2>Game Board</h2>
                     <canvas id="gameboardCanvas" width="600" height="600"></canvas>
+                    <div class="movement-controls">
+                        <button class="move-btn" data-direction="up">↑</button>
+                        <div>
+                            <button class="move-btn" data-direction="left">←</button>
+                            <button class="move-btn" data-direction="down">↓</button>
+                            <button class="move-btn" data-direction="right">→</button>
+                        </div>
+                    </div>
                 </div>
             </div>
             
             <div class="right-panel">
+                <!-- Players List -->
+                <div class="players-panel">
+                    <h2>Players</h2>
+                    <ul id="player-list">
+                        <li>No players connected</li>
+                    </ul>
+                </div>
+                
+                <!-- Chat -->
                 <div class="chat-panel">
                     <h2>Chat</h2>
-                    <div id="chat-messages"></div>
-                    <input type="text" id="chat-input" placeholder="Send message...">
+                    <div id="chat-output" class="chat-output"></div>
+                    <form id="chat-form">
+                        <input type="text" id="chat-input" placeholder="Type message..." />
+                        <button type="submit">Send</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
     
+    <!-- Notifications Container -->
+    <div id="notifications" class="notifications"></div>
+    
+    <!-- Socket.IO Client Library -->
     <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    
+    <!-- Custom Socket Client -->
+    <script src="{{ url_for('static', filename='js/socket-client.js') }}"></script>
+    
+    <!-- Main Application -->
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 </html>
