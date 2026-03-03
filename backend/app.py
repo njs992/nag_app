@@ -2,7 +2,7 @@
 
 from flask import Flask, render_template, jsonify
 from flask_cors import CORS
-import socketio
+from flask_socketio import SocketIO, emit
 
 from config import Config
 
@@ -14,13 +14,7 @@ app.config.from_object(Config)
 CORS(app, origins=Config.CORS_ORIGINS)
 
 # Initialize SocketIO for WebSocket support
-sio = socketio.Server(
-    async_mode='threading',
-    cors_allowed_origins=Config.CORS_ORIGINS,
-    logger=True,
-    engineio_logger=True
-)
-app.wsgi_app = socketio.WSGIApp(sio, app.wsgi_app)
+sio = SocketIO(app, cors_allowed_origins=Config.CORS_ORIGINS)
 
 # ============================================================================
 # ROUTES
@@ -49,21 +43,21 @@ def get_config():
 # ============================================================================
 
 @sio.event
-def connect(sid, environ):
+def connect(sid=None):
     """Handle client connection."""
     print(f"Client {sid} connected")
-    sio.emit("response", {"data": "Connected to server"}, to=sid)
+    emit("response", {"data": "Connected to server"})
 
 @sio.event
-def disconnect(sid):
+def disconnect():
     """Handle client disconnection."""
-    print(f"Client {sid} disconnected")
+    print(f"Client disconnected")
 
 @sio.event
-def echo(sid, data):
+def echo(data):
     """Echo test - simple echo-back for testing."""
-    print(f"Received message from {sid}: {data}")
-    sio.emit("response", {"data": data}, to=sid)
+    print(f"Received message: {data}")
+    emit("response", {"data": data})
 
 # ============================================================================
 # ERROR HANDLERS
